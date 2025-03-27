@@ -79,5 +79,11 @@ treinar_modelo = PythonOperator(
     dag=dag,
 )
 
+trigger_dag = TriggerDagRunOperator(
+    task_id="trigger_dag_build_deploy_infra",  
+    trigger_dag_id="build_deploy_infra",  
+    dag=dag,
+)
+
 # Definindo a ordem de execução das tarefas
 treinar_modelo 

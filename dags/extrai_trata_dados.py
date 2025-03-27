@@ -108,7 +108,7 @@ extrai = PythonOperator(
 
 trigger_dag = TriggerDagRunOperator(
     task_id="trigger_dag_treina_salva_modelo",  
-    trigger_dag_id="dag_traina_salva_modelo",  
+    trigger_dag_id="dag_treina_salva_modelo",  
     dag=dag,
 )
 

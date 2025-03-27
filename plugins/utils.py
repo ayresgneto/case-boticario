@@ -5,8 +5,9 @@ import sklearn
 from datetime import datetime
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, mean_absolute_percentage_error
 import numpy as np
+from pathlib import Path
 
-LOCAL_ARTEFATOS = '/home/ayres/Documents/projects/case-boticario/artefatos'
+LOCAL_ARTEFATOS = Path('/home/ayres/Documents/projects/case-boticario/artefatos')
 
 def salva_modelo_scaler_metadados(modelo, scaler, X_train, y_train, model_dir = LOCAL_ARTEFATOS):
     """
@@ -24,10 +25,10 @@ def salva_modelo_scaler_metadados(modelo, scaler, X_train, y_train, model_dir = 
     """
 
     # Lista todos os arquivos de modelo no diretorio especificado
-    models = [f for f in os.listdir(model_dir) if f.startswith("modelo_v") and f.endswith(".pkl")]
+    models = [f for f in model_dir.rglob('modelo_v*.pkl')]
     
     # Determina a proxima versao do modelo
-    current_version = 1 if not models else max([int(m.split("_v")[-1].split(".pkl")[0]) for m in models]) + 1
+    current_version = 1 if not models else max([int(m.name.split("_v")[-1].split(".pkl")[0]) for m in models]) + 1
     
     # Define os caminhos para os arquivos do modelo e dos metadados
     model_file = os.path.join(model_dir, f"modelo/modelo_v{current_version}.pkl")
@@ -71,8 +72,10 @@ def salva_modelo_scaler_metadados(modelo, scaler, X_train, y_train, model_dir = 
     # Retorna a versão do modelo salvo
     return current_version
 
+CONTAINER_ARTEFATOS = Path('/app/artefatos')
+
 # Função para carregar o modelo e seus metadados
-def carrega_modelo_scaler_metadados(model_dir = LOCAL_ARTEFATOS):
+def carrega_modelo_scaler_metadados(model_dir = CONTAINER_ARTEFATOS):
     """
     Funcao para carregar modelo, scaler e metadados
     
@@ -86,15 +89,16 @@ def carrega_modelo_scaler_metadados(model_dir = LOCAL_ARTEFATOS):
     """
 
     # Lista todos os arquivos de modelo no diretório especificado
-    models = [f for f in os.listdir(model_dir) if f.startswith("modelo_v") and f.endswith(".pkl")]
+    models = [f for f in model_dir.rglob('modelo_v*.pkl')]
     
     # Retorna None caso não existam modelos no diretório
     if not models:
-        return None, None
+        print("No model files found.")
+        return None, None, None
     
     # Extrai as versões dos modelos disponíveis
-    versions = [int(m.split("_v")[-1].split(".pkl")[0]) for m in models]
-    
+    versions = [int(m.name.split("_v")[-1].split(".pkl")[0]) for m in models]
+
     # Determina a versão mais recente
     latest = max(versions)
     
