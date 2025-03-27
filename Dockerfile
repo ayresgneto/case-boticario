@@ -16,8 +16,11 @@ COPY app/ app/
 # Copia os dados necessários para o container
 COPY dados/processed/ dados/
 
-# Copia o diretório do modelo treinado para o container
-COPY modelo/ modelo/
+# Copia o diretório de artefatos do modelo para o container
+COPY artefatos/ artefatos/
+
+# Copia o diretório de plugins para o container
+COPY plugins/ plugins/
 
 # Define a porta que será exposta para acesso à aplicação
 EXPOSE 8000
