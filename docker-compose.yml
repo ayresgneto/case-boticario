@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    container_name: caseboticario
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artefatos:/app/artefatos
+      - ./dados/processed:/app/dados
+    restart: always
