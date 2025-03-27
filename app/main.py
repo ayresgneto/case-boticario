@@ -55,7 +55,7 @@ def predict(input_data: InputData):
     # Retorna a previsão e a versão do modelo utilizado
     return {"Previsão": prediction, 
             "Versão do Modelo": metadata["version"], 
-            "timstamp": metadata["timstamp"],
+            "timestamp": metadata["timestamp"],
             "Versão do Scikit-Learn": metadata["scikit_learn_version"], 
             "Coeficiente R2 em Treino": metadata["r2_train"],
             "MSE": metadata["mse_train"],

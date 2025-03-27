@@ -4,3 +4,4 @@ seaborn==0.13.2
 scikit-learn==1.6.1
 pydantic==2.10.6
 fastapi==0.115.12
+uvicorn==0.34.0
