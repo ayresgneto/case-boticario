@@ -9,11 +9,24 @@ import numpy as np
 LOCAL_ARTEFATOS = '/home/ayres/Documents/projects/case-boticario/artefatos'
 
 def salva_modelo_scaler_metadados(modelo, scaler, X_train, y_train, model_dir = LOCAL_ARTEFATOS):
+    """
+    Funcao para salvar modelo, scaler e metadados
+    
+    Parâmetros:
+    - modelo(Object): Objeto instanciado do modelo
+    - scaler(Object): Objeto instanciado do scaler
+    - X_train(ndarray): array com dados de x_train
+    - y_train(ndarray): array com dados de y_train
+    - model_dir(string): Caminho do diretorio onde estao armazenados os artefatos gerados pelo modelo
+    
+    Retorna:
+    current_version(int): versao do modelo salvo
+    """
 
-    # Lista todos os arquivos de modelo no diretório especificado
+    # Lista todos os arquivos de modelo no diretorio especificado
     models = [f for f in os.listdir(model_dir) if f.startswith("modelo_v") and f.endswith(".pkl")]
     
-    # Determina a próxima versão do modelo
+    # Determina a proxima versao do modelo
     current_version = 1 if not models else max([int(m.split("_v")[-1].split(".pkl")[0]) for m in models]) + 1
     
     # Define os caminhos para os arquivos do modelo e dos metadados
@@ -57,3 +70,50 @@ def salva_modelo_scaler_metadados(modelo, scaler, X_train, y_train, model_dir = 
     
     # Retorna a versão do modelo salvo
     return current_version
+
+# Função para carregar o modelo e seus metadados
+def carrega_modelo_scaler_metadados(model_dir = LOCAL_ARTEFATOS):
+    """
+    Funcao para carregar modelo, scaler e metadados
+    
+    Parâmetros: 
+    - model_dir(string): Caminho do diretorio onde estao armazenados os artefatos gerados pelo modelo
+ 
+    Retorna:
+    - model(Object pickle): Objeto com modelo carregado
+    - scaler(Object pickle): Objeto com scaler carregado
+    - metadata(JSON): Json com metadados carregado
+    """
+
+    # Lista todos os arquivos de modelo no diretório especificado
+    models = [f for f in os.listdir(model_dir) if f.startswith("modelo_v") and f.endswith(".pkl")]
+    
+    # Retorna None caso não existam modelos no diretório
+    if not models:
+        return None, None
+    
+    # Extrai as versões dos modelos disponíveis
+    versions = [int(m.split("_v")[-1].split(".pkl")[0]) for m in models]
+    
+    # Determina a versão mais recente
+    latest = max(versions)
+    
+    # Define os caminhos para os arquivos do modelo, scaler e dos metadados mais recentes
+    model_file = os.path.join(model_dir, f"modelo/modelo_v{latest}.pkl")
+    scaler_file = os.path.join(model_dir, f"scaler/scaler_v{latest}.pkl")
+    metadata_file = os.path.join(model_dir, f"metadados/metadados_v{latest}.json")
+    
+    # Carrega o modelo do arquivo
+    with open(model_file, "rb") as f:
+        model = pkl.load(f)
+
+        # Carrega o modelo do arquivo
+    with open(scaler_file, "rb") as f:
+        scaler = pkl.load(f)
+    
+    # Carrega os metadados do arquivo
+    with open(metadata_file, "r") as f:
+        metadata = json.load(f)
+    
+    # Retorna o modelo e seus metadados
+    return model, scaler, metadata

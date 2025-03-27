@@ -16,6 +16,14 @@ ARTEFATOS_PATH = Variable.get('ARTEFATOS_PATH')
 
 # Função Python a ser executada pela DAG
 def treina_salva_modelo():
+    """
+    Funcao para treinar e salvar modelo
+    
+    Parâmetros: None
+ 
+    Retorna: None
+    
+    """
     
     # Carrega os dados de um arquivo CSV
     df = pd.read_csv(f"{PROCESSED_DATA_PATH}HousePrices_HalfMil_processed.csv")

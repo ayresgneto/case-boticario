@@ -10,6 +10,14 @@ RAW_DATA_PATH = Variable.get('RAW_DATA_PATH')
 PROCESSED_DATA_PATH = Variable.get('PROCESSED_DATA_PATH')
 
 def extrai_trata_dados():
+    """
+    Funcao para extrair e tratar dados
+    
+    Parâmetros: None
+
+    Retorna: None
+
+    """
 
     df = pd.read_csv(f"{RAW_DATA_PATH}HousePrices_HalfMil.csv")
 
