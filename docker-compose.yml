@@ -2,6 +2,7 @@ services:
   app:
     build: .
     container_name: caseboticario
+    image: case-boticario-image
     ports:
       - "8000:8000"
     volumes:
