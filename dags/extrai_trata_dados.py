@@ -18,69 +18,72 @@ def extrai_trata_dados():
     Retorna: None
 
     """
+    try:
+        df = pd.read_csv(f"{RAW_DATA_PATH}HousePrices_HalfMil.csv")
 
-    df = pd.read_csv(f"{RAW_DATA_PATH}HousePrices_HalfMil.csv")
+        #=================TRATAMENTO NULOS=============================
 
-    #=================TRATAMENTO NULOS=============================
+        log.info('Início do processo de detecção e remoção de nulos')
 
-    log.info('Início do processo de detecção e remoção de nulos')
-
-    nulos = df.isnull().sum().sum()
- 
-    # Exibir informações sobre os nulos
-    if nulos > 0:
-        log.info(f'Encontrados {nulos} valores nulos no DataFrame.')
-        log.info('Linhas com valores nulos:')
-        log.info(df[df.isnull().any(axis=1)]) 
-
-        # Remover linhas com valores nulos
-        df = df.dropna()
-        log.info('Linhas com valores nulos removidas.')
-    else:
-        log.info('Nenhum valor nulo encontrado no DataFrame.')
+        nulos = df.isnull().sum().sum()
     
-    #==============TRATAMENTO OUTLIERS==========================================
-    for coluna in df.columns:
-        
-        log.info('Inicio do processo de deteccao e remocao de outliers')
+        # Exibir informações sobre os nulos
+        if nulos > 0:
+            log.info(f'Encontrados {nulos} valores nulos no DataFrame.')
+            log.info('Linhas com valores nulos:')
+            log.info(df[df.isnull().any(axis=1)]) 
 
-        #metodo IQR
-        Q1 = df[coluna].quantile(0.25)
-        Q3 = df[coluna].quantile(0.75)
-        IQR = Q3 - Q1
-        limite_inferior = Q1 - 1.5 * IQR
-        limite_superior = Q3 + 1.5 * IQR
+            # Remover linhas com valores nulos
+            df = df.dropna()
+            log.info('Linhas com valores nulos removidas.')
+        else:
+            log.info('Nenhum valor nulo encontrado no DataFrame.')
 
-        log.info(f'Q1: {Q1}, Q3: {Q3}, IQR: {IQR}')
-        log.info(f'Limite inferior: {limite_inferior}, Limite superior: {limite_superior}')
+        #==============TRATAMENTO OUTLIERS==========================================
+        for coluna in df.columns:
 
-        # Exibir os dados com outliers
-        outliers = df[(df[coluna] < limite_inferior) | (df[coluna] > limite_superior)]
-        if not outliers.empty:
-            log.info('Outliers encontrados:')
-            log.info(outliers)
+            log.info('Inicio do processo de deteccao e remocao de outliers')
 
-        # Remover os outliers
-        df = df[(df[coluna] >= limite_inferior) & (df[coluna] <= limite_superior)]
+            #metodo IQR
+            Q1 = df[coluna].quantile(0.25)
+            Q3 = df[coluna].quantile(0.75)
+            IQR = Q3 - Q1
+            limite_inferior = Q1 - 1.5 * IQR
+            limite_superior = Q3 + 1.5 * IQR
 
-        log.info('Outliers removidos.')
+            log.info(f'Q1: {Q1}, Q3: {Q3}, IQR: {IQR}')
+            log.info(f'Limite inferior: {limite_inferior}, Limite superior: {limite_superior}')
+
+            # Exibir os dados com outliers
+            outliers = df[(df[coluna] < limite_inferior) | (df[coluna] > limite_superior)]
+            if not outliers.empty:
+                log.info('Outliers encontrados:')
+                log.info(outliers)
+
+            # Remover os outliers
+            df = df[(df[coluna] >= limite_inferior) & (df[coluna] <= limite_superior)]
+
+            log.info('Outliers removidos.')
 
 
-    #=============TRATAMENTO DUPLICATAS================================================
-    
-    log.info('Inicio do processo de deteccao e remocao de duplicatas')
+        #=============TRATAMENTO DUPLICATAS================================================
 
-    duplicatas_completas = df.duplicated()
+        log.info('Inicio do processo de deteccao e remocao de duplicatas')
 
-    if duplicatas_completas.sum() > 0:
-        log.info(f'Foram encontradas {duplicatas_completas.sum()} duplicatas.')
-        log.info(df[duplicatas_completas])
-        df = df.drop_duplicates()
-        log.info('Duplicatas removidas.')
-    else:
-        log.info('Nenhuma duplicata encontrada.')
+        duplicatas_completas = df.duplicated()
 
-    df.to_csv(f"{PROCESSED_DATA_PATH}HousePrices_HalfMil_processed.csv", index=False)
+        if duplicatas_completas.sum() > 0:
+            log.info(f'Foram encontradas {duplicatas_completas.sum()} duplicatas.')
+            log.info(df[duplicatas_completas])
+            df = df.drop_duplicates()
+            log.info('Duplicatas removidas.')
+        else:
+            log.info('Nenhuma duplicata encontrada.')
+
+        df.to_csv(f"{PROCESSED_DATA_PATH}HousePrices_HalfMil_processed.csv", index=False)
+        log.info(f"Dados extraidos e processados com sucesso em: {PROCESSED_DATA_PATH}")
+    except Exception as e:
+        log.error("Erro ao extrair e processar os dados: %s", str(e))
 
 # Definindo os parâmetros da DAG
 default_args = {
