@@ -6,6 +6,8 @@ from datetime import datetime
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, mean_absolute_percentage_error
 import numpy as np
 from pathlib import Path
+import mlflow
+import mlflow.sklearn
 
 LOCAL_ARTEFATOS = Path('/home/ayres/Documents/projects/case-boticario/artefatos')
 
@@ -47,6 +49,11 @@ def salva_modelo_scaler_metadados(modelo, scaler, X_train, y_train, model_dir = 
     rmse_train = np.sqrt(mse_train)
     mae_train = mean_absolute_error(y_train, y_pred)
     mape_train = mean_absolute_percentage_error(y_train, y_pred)
+
+    mlflow.log_metric("mse_train", mse_train)
+    mlflow.log_metric("rmse_train", rmse_train)
+    mlflow.log_metric("mae_train", mae_train)
+    mlflow.log_metric("mape_train", mape_train)
     
     
     # Gera os metadados, incluindo versão, timestamp, versão do scikit-learn e R² em treino
