@@ -103,6 +103,8 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
         └── build_deploy_infra.py
         └── extrai_trata_dados.py
         └── treina_salva_modelo.py
+    └── Docs
+        └── arquitetura_case_boticario.png
     └── 📁notebooks
         └── model.ipynb
     └── 📁plugins
