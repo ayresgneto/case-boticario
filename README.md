@@ -118,8 +118,13 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
     └── README.md
     └── requirements.txt
 ```
+### explicar os arquivos e diretorios
 
 ### Arquitetura
+
+![Logo do Projeto](docs/arquitetura_case_boticario.png)
+
+
 
 
 
