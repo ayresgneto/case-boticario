@@ -56,6 +56,70 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
         e o diretório plugins na raíz da instalação<br>
     Obs: caso nao exista os diretórios, crie-os
 
+### Estrutura de diretórios
+
+```
+└── 📁case-boticario
+    └── 📁app
+        └── main.py
+        └── modelo.py
+    └── 📁artefatos
+        └── 📁metadados
+            └── metadados_v1.json
+            └── metadados_v2.json
+            └── metadados_v3.json
+            └── metadados_v4.json
+            └── metadados_v5.json
+            └── metadados_v6.json
+            └── metadados_v7.json
+            └── metadados_v8.json
+            └── metadados_v9.json
+        └── 📁modelo
+            └── modelo_v1.pkl
+            └── modelo_v2.pkl
+            └── modelo_v3.pkl
+            └── modelo_v4.pkl
+            └── modelo_v5.pkl
+            └── modelo_v6.pkl
+            └── modelo_v7.pkl
+            └── modelo_v8.pkl
+            └── modelo_v9.pkl
+        └── 📁scaler
+            └── scaler_v1.pkl
+            └── scaler_v2.pkl
+            └── scaler_v3.pkl
+            └── scaler_v4.pkl
+            └── scaler_v5.pkl
+            └── scaler_v6.pkl
+            └── scaler_v7.pkl
+            └── scaler_v8.pkl
+            └── scaler_v9.pkl
+    └── 📁dados
+        └── 📁processed
+            └── HousePrices_HalfMil_processed.csv
+        └── 📁raw
+            └── HousePrices_HalfMil.csv
+    └── 📁dags
+        └── build_deploy_infra.py
+        └── extrai_trata_dados.py
+        └── treina_salva_modelo.py
+    └── 📁notebooks
+        └── model.ipynb
+    └── 📁plugins
+        └── __init__.py
+        └── 📁__pycache__
+            └── __init__.cpython-311.pyc
+            └── utils.cpython-311.pyc
+        └── utils.py
+    └── .gitignore
+    └── cliente.py
+    └── docker-compose.yml
+    └── Dockerfile
+    └── README.md
+    └── requirements.txt
+```
+
+### Arquitetura
 
 
 
