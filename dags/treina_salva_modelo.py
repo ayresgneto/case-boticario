@@ -106,7 +106,7 @@ def check_metricas(**kwargs):
     Parâmetros:
     - kwargs(dict): retorno de treino_salva_modelo()
     """
-
+    # dados recebidos via xcom
     ti = kwargs['ti']
     r2 = ti.xcom_pull(task_ids='treina_modelo', key='r2')
     try:
@@ -114,6 +114,8 @@ def check_metricas(**kwargs):
         if r2:
             if r2 < 0.7:
                 log.info("ATENÇÃO: R2 é menor que 0.7. Possível Drift")
+
+                #aqui poderiamos adicionar alertas por e-mail, slack ou outras ferramentas como grafana, etc
             else:
                 log.info(f"R2: {r2}")
         else:
@@ -124,7 +126,7 @@ def check_metricas(**kwargs):
 
 #=====================DAG CONFIGS=========================================================
 
-# Definindo os parâmetros da DAG
+# Definindo os parametros da DAG
 default_args = {
     'owner': 'Admin',
     'retries': 1,
