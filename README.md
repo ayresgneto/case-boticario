@@ -170,6 +170,12 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
 
 ![Logo do Projeto](docs/arquitetura_case_boticario.png)
 
+- Resumo: O dado bruto é extraído e tratado pela dag <i>extrai_trata_dados.py</i> e armazenado na camada processed.<br>
+Em seguida, a dag <i>treina_salva_modelo.py</i> utiliza o dado processado para treinar, checar métricas e<br>
+salvar o modelo,scaler e metadados em disco em /artefatos. E também, as métricas são registradas pelo mlflow.<br>
+E para conculuir, a dag <i>build_deploy_infra.py</i> cria uma imagem e disponibiliza usando os arquivos de<br>
+configuração em /app uma API que retorna um previsão baseada nas características do imóvel.
+
 ### Tecnologias usadas
 
 1. python<br>
