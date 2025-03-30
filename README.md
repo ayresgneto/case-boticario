@@ -169,6 +169,27 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
 
 ![Logo do Projeto](docs/arquitetura_case_boticario.png)
 
+### Tecnologias usadas
+
+1. python<br>
+2. bash Script<br>
+3. airflow<br>
+4. docker<br>
+5. mlflow<br>
+6. linux<br>
+
+
+### Conclusão e próximos passos
+
+O projeto atende a necessidade de disponibilizar um modelo de machine learning através de um pipeline de dados.<br>
+Utiliza de tecnologias e processos simplificados, de fácil compreensão e eficaz para o volume de dados.<br>
+Em caso de maior volumetria, alguns processos poderiam ser melhorados como:<br>
+- Utilizar serviços em nuvem como Composer para Airflow, storage para armazenamento dos arquivos, um<br>
+cluster Dataproc com pyspark para ingestão e processamento de dados ou até mesmo usar Cloud functions com<br> 
+triggers de mensageria do Pub/sub<br>
+- Os dados poderiam ser armazenados em banco de dados e poderiamos usar scripts em SQL para ingestão,<br>
+utilizando ferramentas como pysparl.sql<br>
+- A infraestrutura poderia estar em IaC(terraform) para um melhor controle e automação dos recursos
 
 
 
