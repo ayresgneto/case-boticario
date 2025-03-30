@@ -160,7 +160,7 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
 5. docs: arquivos de documentação <br>
 6. notebooks: notebook com análise, exploração de dados e experimentação do modelo<br>
 7. plugins: arquivos de configuração e suporte as dags<br>
-    7.1: utils.py: arquivo contem funções de suporte para dag de treinamento e de carragamento do modelo no cont&ainer
+    7.1: utils.py: arquivo contem funções de suporte para dag de treinamento e de carragamento do modelo no contâiner
 8. cliente.py: arquivo que realiza requests a API<br>
 9. docker-compose.yml: configuração de imagem e contâiners<br>
 10. Dockerfile: configuração de arquivos e comportamento do contâiner<br>
