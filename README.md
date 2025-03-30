@@ -187,8 +187,8 @@ Em caso de maior volumetria, alguns processos poderiam ser melhorados como:<br>
 - Utilizar serviços em nuvem como Composer para Airflow, storage para armazenamento dos arquivos, um<br>
 cluster Dataproc com pyspark para ingestão e processamento de dados ou até mesmo usar Cloud functions com
 triggers de mensageria do Pub/sub<br>
-- Os dados poderiam ser armazenados em banco de dados e poderiamos usar scripts em SQL para ingestão,<br>
-utilizando ferramentas como pysparl.sql<br>
+- Os dados poderiam ser armazenados em banco de dados e poderíamos usar scripts em SQL para ingestão,<br>
+utilizando ferramentas como pyspark.sql<br>
 - A infraestrutura poderia estar em IaC(terraform) para um melhor controle e automação dos recursos
 
 
