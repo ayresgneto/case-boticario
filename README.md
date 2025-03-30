@@ -26,10 +26,15 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
 
 3. Crie um ambiente virtual e ative-o:<br>
     No terminal digite:<br>
+
         <i>python -m venv nome_do_ambiente</i><br>
+
         ou, caso esteja usando python3<br>
+
         <i>python3 -m venv nome_do_ambiente</i><br>
+
         Ative-o usando o seguinte comando:<br>
+
         <i>source nome_do_ambiente/bin/activate</i><br>
 
 4. Instale as dependências:<br>
@@ -55,6 +60,28 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
         Adicione as dags do projeto dentro do diretório dags onde o airflow foi instalado<br> 
         e o diretório plugins na raíz da instalação<br>
     Obs: caso nao exista os diretórios, crie-os
+
+    5.4 Configurando paths<br>
+        Em variáveis no airflow adicione os seguintes caminhos:<br>
+        PROCESSED_DATA_PATH = /caminho_para_o_csv_processado<br>
+        ARTEFATOS_PATH = /caminho_para_os_artefatos<br>
+        METADADOS_PATH = /caminho_para_os_metadados<br>
+        RAW_DATA_PATH = /caminho_para_o_csv_sem_tratamento
+    
+    6. Instalação mlflow<br>
+        No terminal, digite:<br>
+
+        <i>pip install mlflow</i><br>
+
+        Em seguida, deixe em execução o terminal com o seguinte comando:<br>
+
+        <i>mlflow ui --port 5000</i>
+
+    7. Configure o arquivo utils.py<br>
+        Dentro do diretório plugins, abra o arquivo utils.py e altere a variavel <i>LOCAL_ARTEFATOS</i><br>
+        e coloque o caminho local dos artefatos
+
+
 
 ### Estrutura de diretórios
 
@@ -120,7 +147,23 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
     └── README.md
     └── requirements.txt
 ```
-### explicar os arquivos e diretorios
+### Arquivos e diretórios
+
+1. app: diretório onde estão os arquivos de configuração da API<br>
+2. artefatos: diretório onde estão os artefatos gerados no treinamento do modelo<br>
+3. dados: diretório onde estão os arquivos CSV raw e processado<br>
+4. dags: diretório onde se encontram as dags de trinamento e deploy do modelo<br>
+    4.1 build_deploy_infra.py: Cria imagem e container docker para a API<br>
+    4.2 extrai_trata_dados.py: Extrai os dados brutos do csv em /dados/raw, <br>
+    trata os dados e salva em /dados/processed<br>
+    4.3 treina_salva_modelo.py Treina modelo, checa métricas e salva em disco em /artefatos<br>
+5. docs: arquivos de documentação <br>
+6. notebooks: notebook com análise, exploração de dados e experimentação do modelo<br>
+7. plugins: arquivos de configuração e suporte as dags<br>
+8. cliente.py: arquivo que realiza requests a API<br>
+9. docker-compose.yml: configuração de imagem e contâiners<br>
+10. Dockerfile: configuração de arquivos e comportamento do contâiner<br>
+11. requirements.txt: bibliotecas de dependências 
 
 ### Arquitetura
 
