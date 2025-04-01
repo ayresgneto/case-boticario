@@ -68,7 +68,7 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
         METADADOS_PATH = /caminho_para_os_metadados<br>
         RAW_DATA_PATH = /caminho_para_o_csv_sem_tratamento
     
-    6. Instalação mlflow<br>
+6. Instalação mlflow<br>
         No terminal, digite:<br>
 
         <i>pip install mlflow</i><br>
@@ -77,7 +77,7 @@ ferramentas para executá-lo. Segue abaixo os passos necessários para ambiente 
 
         <i>mlflow ui --port 5000</i>
 
-    7. Configure o arquivo utils.py<br>
+7. Configure o arquivo utils.py<br>
         Dentro do diretório plugins, abra o arquivo utils.py e altere a variavel <i>LOCAL_ARTEFATOS</i><br>
         e coloque o caminho local dos artefatos
 
