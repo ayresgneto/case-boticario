@@ -97,9 +97,8 @@ dag = DAG(
     'extrai_dados_dag',
     default_args=default_args,
     description='Dag de extracao de dados',
-    #schedule_interval='@daily',  
-    #start_date=datetime(2025, 3, 25), 
-    catchup=False,
+    schedule_interval=None,
+    catchup=False
 )
 
 

@@ -137,6 +137,7 @@ default_args = {
 dag = DAG(
     'dag_treina_salva_modelo',
     default_args=default_args,
+    schedule_interval=None,
     description='DAG de treinamento do modelo com MLflow e otimização',
     catchup=False,
 )
