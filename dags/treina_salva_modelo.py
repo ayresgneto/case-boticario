@@ -139,7 +139,7 @@ dag = DAG(
     default_args=default_args,
     schedule_interval=None,
     description='DAG de treinamento do modelo com MLflow e otimização',
-    catchup=False,
+    catchup=False
 )
 
 # Definindo as tarefas
