@@ -7,7 +7,7 @@ dag = DAG(
     'build_deploy_infra',
     description='Executa comandos Bash para infraestrura',
     schedule_interval=None,
-    start_date=datetime(2025, 3, 27),
+    #start_date=datetime(2025, 3, 27),
     catchup=False  
 )
 
